@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+	<section>
+		
+		
+		<div class="card mr-3 ml-3">
+		
+			<div class="card-body">
+			
+				<h1 class="text-center">Add Error Details</h1>
+				
+				<div class="container-fluid mt-1">
+				
+				<div class="row">
+					
+					<div class="col-md-8 offset-md-2">
+					
+						<form action="#" 
+							  th:object="${issues}"
+							  enctype="multipart/form-data"
+							  method="POST"
+							  th:action="@{/user/process-issues}"
+							  class="mt-2"
+						>
+						
+						
+						<!--Project Name  -->
+						
+						<div class="input-group">
+						
+							<div class="input-group-prepend">
+							
+								<div class="input-group-text ">
+										
+										<span class="font-weight-bold">Project </span>
+									
+								</div>
+							
+							</div>
+						
+							<input required type="text" id="projectName" name="project_name" placeholder="Enter Name here" class="form-control" />
+						
+						</div>
+						
+						
+						<!-- Project Issue -->
+						
+						<div class="input-group mt-3">
+						
+							<div class="input-group-prepend">
+							
+								<div class="input-group-text ">
+										
+										<span class="font-weight-bold">Issue</span>
+									
+								</div>
+							
+							</div>
+						
+							<input required type="text" id="prj_issue" name="issue" placeholder="Enter Error Code" class="form-control" />
+						
+						</div>
+						
+						<!-- Details Field  -->
+						
+						<div class="input-group mt-3">
+						
+							<div class="input-group-prepend">						
+								<div class="input-group-text ">
+										<span class="font-weight-bold">Details</span>									
+								</div>							
+							</div>
+							<input required type="text" id="details" name="details" 
+							placeholder="Error Details" class="form-control" />
+						</div>
+						
+		
+						<!--solution-->
+						
+						<div class="form-group mt-3">
+							
+							<textarea id="mytextarea" placeholder="Enter solutions" name="solution"  class="form-control"  rows="10"></textarea>
+						
+						</div>
+						
+						<div class="container text-center">
+						 <button class="btn btn-outline-primary">Save Contact</button>
+						</div>
+						</form>
+					
+					
+					</div>
+				
+				
+				</div>
+				
+				</div>
+			
+			
+			</div>
+		
+		</div>
+		
+		
+      <script>
+        $(document).ready(() => {
+          $(".item").removeClass("active");
+          $("#add-link").addClass("active");
+        });
+      </script>
+		
+	</section>
+</body>
+</html>
