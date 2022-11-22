@@ -1,0 +1,51 @@
+<section>
+		<div class="container">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Show Solutions</h4>
+					<div class="form-group">
+						<input class="form-control" type="text" id="myInput"
+							onkeyup="myFunction()" placeholder="Search for names.."
+							title="Type in a name">
+					</div>
+				</div>
+				<div class="card-body">
+					<table id="myTable" class="table">
+						<tr th:each="s :${listSolution}">
+							<td class="show-div" th:text="${s.issue}"></td>
+							<td><p th:text="${s.details}"></p>
+								<p class="" th:text="${s.solution}" ></p></td>
+								
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+			<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr","a");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.show-div').click(function() {
+				$(this).find('.accordion-content').toggle();
+			});
+		});
+	</script>
+	</section>
