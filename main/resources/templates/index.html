@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+	<section class="landingPage">
+	
+	<!-- Department wise card -->
+		<div class="container">
+		<div class="row">
+		<div class="col-md-4 col-sm-2" th:each="d : ${dpt}">
+		<div class="card my-5" style="width: 18rem;">
+		<div class="card-header bg-dark text-light">
+		<p class="cardHeading" th:text="${d.department}"></p>
+		</div>
+			<div class="card-body">
+			<a th:href="@{'/showErrors/'+${d.id}}" class="btn btn-primary btn-block">Show Solutions</a>
+			</div>
+				<div class="card-footer text-center">
+			<p style="letter-spacing: 3px">#<span th:text="${d.count}"></span></p>
+		</div>
+		</div>
+	
+		</div>
+		</div>
+		</div>
+	</section>
+</body>
+</html>

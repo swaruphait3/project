@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="card">
+						<div class="card-header">
+						<h3 class="text-center">Insert Error Details</h3>
+						</div>
+						<div class="card-body">
+
+							<form th:object="${issues}" enctype="multipart/form-data"
+								method="POST" th:action="@{/user/process-issues}" class="mt-2">
+                                <!-- Department fields -->
+								<div class="form-group">
+									<label for="depart_field" class="label">Project:</label> <select
+										class="form-control" name="projectId" id="projectId">
+										<option th:each="p :${project}" th:text="${p.project_name}"
+											th:value="${p.id}"></option>
+									</select>
+								</div>
+								<!-- Technologies fields -->
+								<div class="form-group">
+									<label for="tech_field" class="label">Technologies:</label> <input
+										type="text" class="form-control"
+										placeholder="Enter your technologies" name="technology"
+										id="tech_field">
+								</div>
+
+								<!-- Error code fields -->
+								<div class="form-group">
+									<label for="error_field" class="label">Error Code:</label> <input
+										required type="text" id="error_field" name="issue"
+										placeholder="Enter Error Code" class="form-control" />
+								</div>
+								<!-- Faceing problems -->
+								<div class="form-group">
+									<label for="problem_field" class="label">Problem:</label> <input
+										required type="text" id="error_field" name="details"
+										placeholder="Enter Error Code" class="form-control" />
+								</div>
+								<!-- solutions fields -->
+								<div class="form-group">
+									<label for="problem_field" class="label">Solutions:</label>
+									<textarea id="mytextarea" placeholder="Enter solutions"
+										name="solution" class="form-control" rows="8"></textarea>
+								</div>
+								<!-- image upload sections -->
+								<div class="form-group">
+									<input type="file" class="" id="customFile" name="error_img"/>
+								</div>
+                                 <div class="form-group">
+                                 <input type="submit" class="btn btn-primary btn-block">                                 
+                                 </div>								
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<script>
+        $(document).ready(() => {
+          $(".item").removeClass("active");
+          $("#add-link").addClass("active");
+        });
+      </script>
+
+	</section>
+</body>
+</html>

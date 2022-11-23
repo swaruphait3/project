@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+	<section>
+			<div class="container">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Show Solutions</h4>
+					<div class="form-group">
+						<input class="form-control" type="text" id="myInput"
+							onkeyup="myFunction()" placeholder="Search error code.."
+							title="Type in a name">
+					</div>
+				</div>
+				<div class="card-body">
+					<table id="myTable" class="table">
+						<tr th:each="s :${issue}">
+							<td class="toggle-slow"><h5><span style="text-transform: capitalize; 
+							letter-spacing: 2px;
+							"  th:text="${s.details}"></span></h5>  
+							<p style="letter-spacing: 3px"><span th:text="${s.issue}"></span> (<span th:text="${s.technology}"></span>)</p>
+							<p class="box" style=" letter-spacing: 1px; font-weight: 400;" th:text="${s.solution}" >
+							
+							<span>
+							<form th:action="@{'/user/updateSolution/'+${s.cId}}"
+									method="post">
+									<input type="submit" class="btn btn-outline-primary"
+										value="Edit">
+								</form>
+							
+							</span>
+							</p>
+							
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+			<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}	
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+	     $(".toggle-slow").click(function() {
+	    	 $(this).find(".box").toggle("slow");
+	     });
+	});
+
+	</script>
+	</section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+		<!-- 
+		
+		<div class="container">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Show Solutions</h4>
+					<div class="form-group">
+						<input class="form-control" type="text" id="myInput"
+							onkeyup="myFunction()" placeholder="Search for names.."
+							title="Type in a name">
+					</div>
+				</div>
+				<div class="card-body">
+					<table id="myTable" class="table">
+						<tr th:each="s :${issue}">
+							<td class="show-div" th:text="${s.issue}"></td>
+							<td><p>
+									<span th:text="${s.details}"></span> <span
+										style="display: none;" th:text="${s.technology}"></span>
+								</p>
+								<p>
+									<span th:text="${s.solution}"></span>
+								</p>
+								<form th:action="@{'/user/updateSolution/'+${s.cId}}"
+									method="post">
+									<input type="submit" class="btn btn-outline-primary"
+										value="Edit">
+								</form></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script>
+			function myFunction() {
+				var input, filter, table, tr, td, i, txtValue;
+				input = document.getElementById("myInput");
+				filter = input.value.toUpperCase();
+				table = document.getElementById("myTable");
+				tr = table.getElementsByTagName("tr", "a");
+				for (i = 0; i < tr.length; i++) {
+					td = tr[i].getElementsByTagName("td")[0];
+					if (td) {
+						txtValue = td.textContent || td.innerText;
+						if (txtValue.toUpperCase().indexOf(filter) > -1) {
+							tr[i].style.display = "";
+						} else {
+							tr[i].style.display = "none";
+						}
+					}
+				}
+			}
+
+			$(document).ready(function() {
+				$('.show-div').click(function() {
+					$(this).find('.accordion-content').toggle();
+				});
+			});
+		</script>
+		
+		
+		
+		
+		
+<div class="container">
+<div class="row">
+<div class="card mr-3">
+<div class="card-header">
+</div>
+<div class="card-body">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Error</th>
+      <th scope="col">Details</th>
+      <th scope="col">Solutions</th>
+       <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="s :${issue}">
+      <td th:text="${s.issue}"></td>
+       <td th:text="${s.details}"></td>
+        <td th:text="${s.solution}">
+        </td>
+       <td>
+       <form th:action="@{'/user/updateSolution/'+${s.cId}}" method="post">
+       <input type="submit" class="btn btn-outline-primary" value="Edit">
+       </form>
+       
+              </a>
+       </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+       
+
+ -->
+		<!--        <a th:href="@{'/user/updateSolution/'+${s.cId}}" class="btn btn-outline-warning">
+       <i class="fa fa-pen text-dark"></i> -->
+	</section>
+</body>
+</html>

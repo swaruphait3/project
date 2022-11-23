@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header bg-dark">
+							<p class="text-center loginTitle">Update Project</p>
+						</div>
+						<div class="card-body">
+								<div th:if="${session.message}"
+									th:classappend="${session.message.type}" class="alert"
+									role="alert">
+									<p class="text-center" th:text="${session.message.content}"></p>
+									<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+								</div>
+								<form th:action="@{/admin/updateProject}" method="post"
+									th:object="${projects}">
+									<input type="hidden" th:value="${projects.id}" name="id" />
+
+									<div class="form-group">
+										<label for="department" class="label">Department</label> <select
+											class="form-control" name="department" id="department">
+											<option th:text="${projects.department.department}"
+												th:value="${projects.department.id}"></option>
+											<option th:each="d :${dept}" th:text="${d.department}"
+												th:value="${d.id}"></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="project_fields" class="label">Project
+											Name:</label> <input th:type="projects.project_name"
+											class="form-control" id="dept" name="project_name"
+											th:value="${projects.project_name}">
+									</div>
+									<div class="form-group">
+										<input type="submit" class="btn btn-success btn-block">
+									</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</div>
+	</section>
+</body>
+</html>

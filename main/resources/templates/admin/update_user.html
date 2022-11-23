@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" x xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="text-center">Update Details</h4>
+						</div>
+						<div class="card-body">
+							<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+						<form novalidate th:action="@{/admin/processUserUpdate}"
+							method="post" th:object="${userDetail}">
+			
+							<input type="hidden" th:value="${userDetail.id}" name="id" />
+							<div class="form-group">
+								<label for="name_field">Name</label> <input name="name"
+									type="text" class="form-control "
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									id="name_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required th:value="${userDetail.name}" />
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+							</div>
+				            <input type="hidden" name="username" th:value="${userDetail.username}" >
+							<input type="hidden" th:value="${userDetail.password}" name="password">
+							<input type="hidden" th:value="${userDetail.role}" name="role">
+							<input type="hidden" th:value="${userDetail.enabled}" name="enabled">
+	
+							<div class="form-group">
+								<label for="department">Department</label>
+								 <select class="form-control" name="department" id="department">
+									<option th:text="${userDetail.department.department}"
+											th:value="${userDetail.department.id}"></option>
+									
+									<option th:each="d :${dprtmn}" th:text="${d.department}" th:value="${d.id}"></option>
+								</select>
+							</div>
+						
+							
+							<div class="from-group">
+								<input type="submit" class="btn btn-primary btn-block" value="Update Details">
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="text-center">Update Details</h4>
+						</div>
+						<div class="card-body">
+							<div th:if="${session.message}"
+								th:classappend="${session.message.type}" class="alert"
+								role="alert">
+								<p class="text-center" th:text="${session.message.content}"></p>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+							<form th:action="@{/admin/processUserUpdate}" method="post">
+								<input type="hidden" th:value="${userDetail.id}" name="id" />
+								
+								<div class="from-group">
+									<label for="name_fields" class="label">Name</label> <input
+										type="text" class="form-control" name="nname"
+										th:placeholder="${userDetail.name}" />
+								</div>			
+			
+								<div class="form-group my-2">
+									<label for="department" class="label">Department</label>
+									
+									 <select
+										class="form-control" name="udepartment" id="department">
+										<option th:text="${userDetail.department.department}"
+											th:value="${userDetail.department.id}"></option>
+										<option th:each="d :${dprtmn}" th:text="${d.department}"
+											th:value="${d.id}"></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-block btn-primary"
+										value="Update">
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	 -->
+
+	<!-- 
+<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="my-card mt-1">
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+						<h2 class="display-4 text-center">Update Users</h2>
+						<form novalidate th:action="@{/admin/processUserUpdate}"
+							method="post" th:object="${userDetail}">
+			
+							<input type="hidden" th:value="${userDetail.id}" name="id" />
+							<div class="form-group">
+								<label for="name_field">Name</label> <input name="name"
+									type="text" class="form-control "
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									id="name_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required th:value="${userDetail.name}" />
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+							</div>
+							
+							<div class="form-group">
+								<label for="username_field">Username</label> <input
+									name="username" type="username" class="form-control"
+									id="usernamed_field" aria-describedby="usernameHelp"
+									placeholder="Enter here" required th:value="${userDetail.username}" />
+							</div>
+				
+							<input type="hidden" th:value="${userDetail.password}" name="password">
+							<input type="hidden" th:value="${userDetail.role}" name="role">
+							
+								<div class="form-group">
+								<label for="department">Status</label>
+								 <select class="form-control" name="enabled" id="enabled">
+									<option th:text="${userDetail.enabled}" th:value="${userDetail.enabled}"></option>
+									<option value="true">Active</option>
+									<option value="false">Deactive</option>
+								</select>
+							</div>
+							
+							<div class="form-group">
+								<label for="department">Department</label>
+								 <select class="form-control" name="department" id="department">
+									<option th:each="d :${dprtmn}"  th:text="${d.department}" th:value="${d.id}"></option>
+								</select>
+							</div>
+							
+							
+					 
+							
+							<div class="form-group">
+								<label for="department">Department</label>
+								 <select class="form-control" name="department" id="department">
+									<option value="not selected">Select Department</option>
+									<option th:each="d :${dprtmn}" th:text="${d.department}" th:value="${d.id}"></option>
+								</select>
+							</div>
+						
+							
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary  text-white">
+									Submit</button>
+								<button type="reset" class="btn btn-warning ">Reset Password</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+
+
+ -->
+</body>
+</html>

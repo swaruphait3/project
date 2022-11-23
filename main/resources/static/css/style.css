@@ -1,0 +1,261 @@
+body {
+	background: #f2f2f2;
+	min-height: 100vh;
+}
+/*  ******************* landing page css  ********** */
+.landingPage, .loginPage, .registration{
+	background:  #c2d6d6;
+	width: 100%;
+	min-height: 100vh;
+}
+.btn-info{
+	background: #5500DD;
+}
+.bg-blue{
+	background: #2310FF;
+	padding: 0;
+	margin: 0;
+	box-shadow: 0 0 2px 2px blue;
+}
+.landingPage .cardHeading{
+	font-size: 1.5rem;
+	text-align: center;
+	letter-spacing: 3px;
+}
+.landingPage .card-header{
+	background: orange;
+}
+.mr-8{
+	margin-right: 103px;
+	margin-top: -15px;
+}
+
+.box {
+    width: 100%;
+    height: 100px;
+    display: none;
+}
+
+
+
+/* *************  signup page css  ************* */
+.card{
+	box-shadow: 1px 1px 5px 1px black;
+}
+.loginTitle{
+	font-size: 2rem;
+	letter-spacing: 3px;
+	font-weight: 500;
+	text-shadow: 1px 1px 2px #f2f2f2;
+	color: white;
+}
+.label{
+	font-weight: 500;
+	letter-spacing: 2px;
+	padding-left: 5px;
+}
+
+
+.bg-primary {
+	background: linear-gradient(90deg, #0182f8 0%, #1d3ede 100%) !important;
+}
+
+#login .container #login-row #login-column #login-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 420px;
+	border: 1px solid #9C9C9C;
+	background-color: white;
+}
+
+/* sidebar style */
+
+.sidebar {
+	width: 18%;
+	height: 100%;
+	position: fixed;
+	padding-top: 48px;
+	box-shadow: 0px 2px 2px black;
+	margin-top: 12px!important;
+}
+
+.sidebar a {
+	display: block;
+	width: 100%;
+	padding: 10px 25px;
+	text-decoration: none;
+	color: blue;
+	background: #fff;
+	border-radius: 2px;
+	margin: 2px 0 ;
+	box-shadow: 0px 1px 2px black;
+}
+
+.sidebar a:hover {
+	background: #e2e2e2;
+}
+.content {
+	margin-left: 20%;
+}
+
+
+.my_profile_picture{
+	width: 35px;
+	height: 35px;
+	object-fit:cover;
+	border-radius:50%;
+	
+}
+
+/*  search css */
+
+.search-container{
+	position: relative;
+}
+.search-result{
+	position: absolute;
+	background:white;
+	width: 100%;
+	padding:10px;
+	border: 1px solid gray;
+	display: none;
+}
+
+.active{
+	background:#009688 !important;
+	color:white!important;
+}
+	.sidebar .crossBtn{
+	position: absolute;
+	top: 0px;
+	right: 5px;
+	font-size: 25px;
+	cursor: pointer;
+}
+	
+@media only screen and (max-width: 600px) {
+	.sidebar {
+		display: none;
+		width: 80% !important;
+		background: white;
+		height: 100vh;
+		position: fixed;
+		padding-top: 20px;
+	}
+	.content {
+		margin-left: 0% !important;
+	}
+}
+
+  
+  /* 
+  @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
+
+
+.fqa .container {
+  margin: 0 auto;
+  padding: 4rem;
+  width: 48rem;
+}
+
+.fqa .accordion 
+  .accordion-item {
+    border-bottom: 1px solid #e5e5e5;
+  }
+.fqa button[aria-expanded="true"] {
+      border-bottom: 1px solid #03b5d2;
+    }
+  
+.fqa button {
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+    font-size: 1.15rem;
+    font-weight: 400;
+    border: none;
+    background: none;
+    outline: none;
+  }
+.fqa  button:hover,
+.fqa  button:focus {
+      cursor: pointer;
+      color: blue;
+  }
+ .fqa button::after {
+        cursor: pointer;
+        color: #03b5d2;
+        border: 1px solid #03b5d2;
+      }
+.fqa  .accordion-title {
+      padding: 1em 1.5em 1em 0;
+    }
+.fqa    .icon {
+      display: inline-block;
+      position: absolute;
+      top: 18px;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      border: 1px solid;
+      border-radius: 22px;
+    }
+ .fqa .icon ::before {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 9px;
+        left: 5px;
+        width: 10px;
+        height: 2px;
+        background: currentColor;
+      }
+ .fqa .icon::after {
+        display: block;
+        position: absolute;
+        content: "";
+        top: 5px;
+        left: 9px;
+        width: 2px;
+        height: 10px;
+        background: currentColor;
+      }
+  
+  
+  
+  $bg: #fff;
+$text: #7288a2;
+$gray: #4d5974;
+$lightgray: #e5e5e5;
+$blue: #03b5d2; */
+
+
+/*
+
+ .fqa   button[aria-expanded="true"] {
+    color: #03b5d2;
+  }
+ .fqa   .icon ::after {
+        width: 0;
+      }
+    
+ .fqa   .icon.accordion-content {
+      opacity: 1;
+      max-height: 9em;
+      transition: all 200ms linear;
+      will-change: opacity, max-height;
+    }
+ .fqa   .accordion-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: scroll;
+    transition: opacity 200ms linear, max-height 200ms linear;
+    will-change: opacity, max-height;
+  }
+ .fqa    p {
+      font-size: 1rem;
+      font-weight: 300;
+      margin: 2em 0;
+    }
+    */

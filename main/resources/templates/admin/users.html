@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<section>
+		<!-- Button trigger modal -->
+		<div class="text-right mr-8">
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModal">Add New User</button>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-light">
+						<h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true" class="text-light">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{/do_register}" method="post"
+							th:object="${user}">
+							<!-- Name fields -->
+							<div class="form-group">
+								<label for="name_field" class="label">Name:</label> <input
+									type="text" class="form-control" name="name" id="name_field"
+									placeholder="Enter Your Name" />
+							</div>
+							<!-- Username fields -->
+							<div class="form-group">
+								<label for="uname_field" class="label">Username:</label> <input
+									type="text" class="form-control" name="username"
+									id="uname_field" placeholder="Enter Your Username" />
+							</div>
+							<!-- Password fields -->
+							<div class="form-group">
+								<label for="password_field" class="label">Password:</label> <input
+									type="password" class="form-control" name="password"
+									id="password_field" placeholder="Set Your  Password" />
+							</div>
+							<!-- Department fields -->
+							<div class="form-group">
+								<label for="department">Department</label> <select
+									class="form-control" name="department" id="department">
+									<option th:each="d :${dept}" th:text="${d.department}"
+										th:value="${d.id}"></option>
+								</select>
+							</div>
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-primary" value="Add User">
+
+						<button type="submit" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+					<div class="card mt-2">
+						<div class="card-header">
+							<div class="form-group">
+								<input class="form-control" type="text" id="myInput"
+									onkeyup="myFunction()" placeholder="Search for names.."
+									title="Type in a name">
+							</div>
+						</div>
+						<div class="card-body">
+							<table class="table" id="myTable">
+								<thead class="bg-dark text-light">
+									<tr style="letter-spacing: 2px; font-weight: 700;">
+										<th scope="col">Employee Name</th>
+										<th scope="col">Department</th>
+										<th scope="col">Status</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="u :${users}"
+										th:style="${u.enabled} ? 'color:green' : 'color:red'">
+									
+										<td scope="row" th:text="${u.name}"></td>
+										<td scope="row" th:text="${u.department.department}"></td>
+										<td scope="row">
+											<form th:action="@{/activeAndDeactive}" method="post">
+												<input type="hidden" name="uid" th:value="${u.id}">
+												<input type="hidden" name="newstatus"
+													th:value="${u.enabled} ? 'false' : 'true'"> <input
+													type="submit"
+													th:value="${u.enabled} ? 'Active' : 'Deactive'"
+													th:classappend="${u.enabled} ? 'btn-outline-success' : 'btn-danger'"
+													class="btn ">
+											</form>
+										</td>
+										<td><a th:href="@{'/admin/updateUser/'+${u.id}}"
+											class="btn btn-outline-primary">Edit</i>
+										</a> <a th:href="@{'/admin/resetPassword/'+${u.id}}"
+											class="mx-3 btn btn-outline-danger">Reset Password</a></td>
+									</tr>
+								</tbody>
+							</table>
+							<nav>
+								<!--  pagination part -->
+								<div class="">
+									<nav aria-label="Page navigation example">
+										<ul class="pagination">
+											<li th:if="${currentPage != 0}" class="page-item"><a
+												th:href="@{'/admin/users/'+${currentPage-1}}"
+												class="page-link" href="#"> <span aria-hidden="true">&laquo;</span></a></li>
+											<li th:classappend="${currentPage==i-1?'active':''}"
+												th:each="i : ${#numbers.sequence(1,totalPages)}"
+												class="page-item"><a
+												th:href="@{'/admin/users/'+${i-1}}" class="page-link"
+												href="#"><span th:text="${i}"></span></a></li>
+											<li th:if="${currentPage+1 != totalPages}" class="page-item">
+												<a th:href="@{'/admin/users/'+${currentPage+1}}"
+												class="page-link" href="#"> <span aria-hidden="true">&raquo;</span></a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}	
+	</script>
+	</section>
+
+	<!-- 
+	<section>
+		<div class="card">
+			<div class="card-body">
+				<table class="table">
+					<thead class="bg-dark text-light">
+						<tr>
+							<th scope="col">#Sl</th>
+							<th scope="col">Employee Name</th>
+							<th scope="col">Department</th>
+							<th scope="col">Status</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="u :${users}">
+							<th scope="row" th:text="${u.id}"></th>
+							<th scope="row" th:text="${u.name}"></th>
+							<th scope="row" th:text="${u.department.department}"></th>
+							<th scope="row" th:text="${u.enabled}"></th>
+
+
+							<th scope="row">
+								<div class="btn-group">
+									<button type="button" class="btn btn-warning dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">Action</button>
+									<div class="dropdown-menu">
+										<form class="ml-3" th:action="@{'/admin/updateUser/'+${u.id}}"
+											method="post">
+											<button class="btn btn-outline-info" type="submit">Update</button>
+										</form>
+										<a class="dropdown-item" href="#">Deactivate</a> <a
+											class="dropdown-item" href="#">Reset Password</a>
+									</div>
+								</div>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	 -->
+</body>
+</html>

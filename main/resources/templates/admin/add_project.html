@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<section>
+		<!-- Button trigger modal -->
+		<div class="text-right mb-3 mr-8">
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#exampleModal">Add New Project</button>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-light">
+						<h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						
+					</div>
+					<div class="modal-body">
+						<div>
+
+							<div>
+								<form th:action="@{/admin/addProjectForm}" method="post">
+									<div class="form-group">
+										<label for="exampleFormControlSelect1">Department</label> <select
+											class="form-control" name="department" id="department">
+											<option value="not selected">Select Department</option>
+											<option th:each="d :${dept}" th:text="${d.department}"
+												th:value="${d.id}"></option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="projectAdd">Project</label> <input type="text"
+											class="form-control" name="project_name" id="projectAdd"
+											placeholder="Add Project name">
+									</div>
+									<div class="modal-footer">
+										<input class="btn btn-primary" type="submit"
+											value="Add Project">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+					<div class="card">
+						<div class="card-header bg-dark text-light text-center">
+							<h4>Project List</h4>
+							<div class="form-group">
+								<input class="form-control" type="text" id="myInput"
+									onkeyup="myFunction()" placeholder="Search for project.."
+									title="Type in a name">
+							</div>
+						</div>
+
+						<div class="card-body mx-5">
+							<table class="table" id="myTable">
+								<thead class="bg-warning">
+									<tr>
+										<th scope="col">Project</th>
+										<th scope="col">Department</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="p :${proj}">
+										<td th:text="${p.project_name}"></td>
+										<td th:text="${p.department.department}"></td>
+										<!-- *******update project Details****** -->
+										<td>
+      <a th:href="@{'/admin/updateProject/'+${p.id}}" class="btn btn-outline-success">Update
+										</a> 
+  
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+	</section>
+</body>
+</html>

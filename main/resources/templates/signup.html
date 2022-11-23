@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+	<section class="registration">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card mx-lg-4 my-4">
+						<div class="card-header bg-blue">
+							<p class="text-center loginTitle">Registration</p>
+						</div>
+						<div class="card-body">
+							<div th:if="${session.message}"
+								th:classappend="${session.message.type}" class="alert"
+								role="alert">
+								<p class="text-center" th:text="${session.message.content}"></p>
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+							<form th:action="@{/do_register}" method="post"
+								th:object="${user}">
+								<!-- Name fields -->
+								<div class="form-group">
+									<label for="name_field" class="label">Name:</label> <input
+										type="text" class="form-control" name="name" id="name_field"
+										placeholder="Enter Your Name" />
+								</div>
+								<!-- Username fields -->
+								<div class="form-group">
+									<label for="uname_field" class="label">Username:</label> <input
+										type="text" class="form-control" name="username" id="uname_field"
+										placeholder="Enter Your Username" />
+								</div>
+								<!-- Password fields -->
+								<div class="form-group">
+									<label for="password_field" class="label">Password:</label> <input
+										type="password" class="form-control" name="password"
+										id="password_field" placeholder="Set Your  Password" />
+								</div>
+								<!-- Department fields -->
+								<div class="form-group">
+									<label for="depart_field" class="label">Department:</label> <select
+										class="form-control" name="department" id="department">
+										<option value="not selected">Select Department</option>
+										<option th:each="d :${dprt}" th:text="${d.department}"
+											th:value="${d.id}"></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-block btn-success">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- 
+	
+	<div class="my-card mt-1">
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
+						<h2 class="display-4 text-center">Add New User</h2>
+						
+						
+						<form novalidate action="" th:action="@{/do_register}"
+							method="post" th:object="${user}">
+	
+							<div class="form-group">
+								<label for="name_field">Name</label> 
+								<input name="name"
+									type="text" class="form-control "
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									id="name_field"
+									 aria-describedby="emailHelp"
+									placeholder="Enter here" required th:value="${user.name}" />
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="username_field">Username</label> <input
+									name="username" type="username" class="form-control"
+									id="usernamed_field" aria-describedby="usernameHelp"
+									placeholder="Enter here" required th:value="${user.username}" />
+							</div>
+			
+							<div class="form-group">
+								<label for="password_field">Password</label> <input
+									name="password" type="password" class="form-control"
+									id="password_field" aria-describedby="emailHelp"
+									placeholder="Enter here" required />
+							</div>
+	
+							<div class="form-group">
+								<label for="department">Department</label>
+								 <select class="form-control" name="department" id="department">
+									<option value="not selected">Select Department</option>
+									<option th:each="d :${dprt}" th:text="${d.department}" th:value="${d.id}"></option>
+								</select>
+							</div>
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary  text-white">
+									Submit</button>
+								<button type="reset" class="btn btn-warning ">Reset</button>
+							</div>
+						</form>
+					</div>
+	 -->
+</body>
+</html>

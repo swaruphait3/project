@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+		<div class="container">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="text-center">Show Solutions</h4>
+					<div class="form-group">
+						<input class="form-control" type="text" id="myInput"
+							onkeyup="myFunction()" placeholder="Search for names.."
+							title="Type in a name">
+					</div>
+				</div>
+				<div class="card-body">
+					<table id="myTable" class="table">
+						<tr th:each="s :${issuesList}">
+							<td class="toggle-slow"><h5><span style="text-transform: capitalize; 
+							letter-spacing: 2px;
+							"  th:text="${s.details}"></span></h5>  
+							<p style="letter-spacing: 3px"><span th:text="${s.issue}"></span> (<span th:text="${s.technology}"></span>)</p>
+							<p class="box" style=" letter-spacing: 1px; font-weight: 400;" th:text="${s.solution}" ></p>
+							</td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+			<script>
+		function myFunction() {
+			var input, filter, table, tr, td, i, txtValue;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[0];
+				if (td) {
+					txtValue = td.textContent || td.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}	
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+	     $(".toggle-slow").click(function() {
+	    	 $(this).find(".box").toggle("slow");
+	     });
+	});
+
+	</script>
+	</section>
+		
+					<!-- 
+					
+					
+					<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<div class="container fqa">
+			<div class="card">
+				<div class="card-header text-center">
+					<h4>Show Solutions</h4>
+
+					<!--***********Searching functionality*************** 
+
+
+					<div class="form-outline">
+						<input onkeyup="searchSolution()" type="text" id="search-input"
+							class="form-control" placeholder="Search Employee here" />
+						<div class="search_result"></div>
+					</div>
+				</div>
+				<div class="card-body" th:each="s :${issuesList}">
+					<div class="accordion-title show-div text-left">
+						<h5 class="mx-2" style="text-transform: capitalize;" th:text="${s?.details}"></h5>
+						<div class="ml-3">
+						<p class="d-left"  th:text="${s?.technology}">
+						</p>
+						</div>
+						<div class="accordion-content " style="display: none;">
+								<div class="card-body" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+									<p th:text="${s?.solution}"></p>
+									<input class="btn btn-success" onclick="displayImage()" value="Show Image">
+								</div>
+						</div>
+					</div>
+					<hr />
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					******************************************************
+					<tr aria-expanded="false" id="accordion-button-1 "
+				th:each="s :${issuesList}">
+			<div>
+			
+			
+			</div>	
+										<div class="accordion-title show-div text-left">
+
+											<h5 class="mx-5" th:text="${s?.details}">
+											<span><i class="fa-solid fa-maximize"></i></span>
+											</h5>
+                                            <p class="ml-5"><span th:text="${s?.technology}"></span></p>
+											<p class="icon show-hide text-dark" aria-hidden="true"></p>
+											<div class="accordion-content ml-5" style="display: none;">
+<div class="card">
+												<div class="card-body">
+												<p th:text="${s?.solution}" >
+												</p>
+												</div>
+												</div>
+											</div>
+										</div>
+					
+										<hr />
+
+									</tr>
+					
+					
+					
+					</tbody>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script>
+									$(document)
+											.ready(
+													function() {
+														$('.show-div')
+																.click(
+																		function() {
+																			$(
+																					this)
+																					.find(
+																							'.accordion-content')
+																					.toggle();
+																		});
+													});
+								</script>
+	</section>
+
+					
+					 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <div class="accordion">
+    <div class="accordion-item">
+      <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">Why is the moon sometimes out during the day?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button id="accordion-button-2" aria-expanded="false"><span class="accordion-title">Why is the sky blue?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button id="accordion-button-3" aria-expanded="false"><span class="accordion-title">Will we ever discover aliens?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button id="accordion-button-4" aria-expanded="false"><span class="accordion-title">How much does the Earth weigh?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button id="accordion-button-5" aria-expanded="false"><span class="accordion-title">How do airplanes stay up?</span><span class="icon" aria-hidden="true"></span></button>
+      <div class="accordion-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+      </div>
+    </div>
+  </div> -->
+	</div>
+
+
+	<!-- 
+
+
+
+<section>
+<div class="container">
+<div class="row">
+<div class="col-md-8 offset-md-2">
+<div class="card">
+<div class="card-header">
+</div>
+<div class="card-body">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Error</th>
+      <th scope="col">Details</th>
+      <th scope="col">Images</th>
+      <th scope="col">Department</th>
+      <th scope="col">Solutions</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="s :${issuesList}">
+      <td th:text="${s.issue}"></td>
+       <td th:text="${s.details}"></td>
+        <td th:text="${s.images}"></td>
+        <td th:text="${s.user.department.department}"></td>
+     <td th:text="${s.solution}"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<h1>This is error display page</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#Sl.</th>
+      <th scope="col">Error</th>
+      <th scope="col">Details</th>
+      <th scope="col">Images</th>
+      <th scope="col">Department</th>
+      <th scope="col">Solutions</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="s :${issuesList}">
+      <th scope="row" th:text="${s.cId}">1</th>
+      <td th:text="${s.issue}"></td>
+       <td th:text="${s.details}"></td>
+        <td th:text="${s.images}"></td>
+        <td th:text="${s.user.department.department}"></td>
+     <td th:text="${s.solution}"></td>
+    </tr>
+  </tbody>
+</table>
+</section>
+ -->
+</body>
+</html>

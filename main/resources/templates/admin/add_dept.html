@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body>
+	<section>
+ <div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="card">
+						<div class="card-header bg-blue">
+							<p class="text-center loginTitle">Add Department</p>
+						</div>
+						<div class="card-body">
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>					
+						
+						
+							<form th:action="@{/admin/addDeptForm}" method="post">
+								<div class="form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text ">
+												<i class="fa fa-briefcase"></i>
+											</div>
+										</div>
+										<input type="text" class="form-control" id="dept"
+										name="department" required
+											placeholder="Add Department">
+									</div>
+									</div>
+						<div class="">
+											<input type="submit" class="btn btn-block btn-info" value="Add">
+										</div>
+							</form>
+						</div>
+					</div>
+				</div>
+						<div class="col-md-7">
+						
+						<div class="card mr-3">
+					<div class="card-body">
+						<table class="table">
+							<thead class="bg-warning" >
+								<tr  style="letter-spacing: 2px;
+							         font-weight: 700;">
+									<th scope="col">Sl.</th>
+									<th scope="col">Department</th>
+									<th scope="col">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="d :${dp}">
+									<th scope="row" th:text="${d.id}">1</th>
+									<td th:text="${d.department}"
+									 style="letter-spacing: 2px;
+							         font-weight: 500;"></td>
+							         
+									<td>
+									<a class="" th:href="@{'/admin/updateDepart/'+${d.id}}"									
+									><input type="button" class="btn btn-outline-info" value="Update"></a>
+									<!-- 
+									<a href="#" class="mx-3"><i class="fa fa-trash text-danger"></i></a>
+									 -->
+									</td>
+									<!--  -->
+								</tr>	
+							</tbody>		
+						</table>
+					</div>
+				</div>
+						</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

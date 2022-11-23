@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="card">
+						<div class="card-header">
+						<h3 class="text-center">Update Solutions</h3>
+						</div>
+						<div class="card-body">
+                       <form th:action="@{/user/updateSolution}" method="post">
+                       <input type="hidden" th:value="${issueById.cId}" name="id"><br/>
+                       <div class="form-group">
+                       <label for="solutionField" class="label">Solution</label>
+                        <textarea class="form-control" rows="12" th:text="${issueById.solution}" name="nsolution" th:value="${issueById.solution}"></textarea>
+                       </div>
+                       <div class="form-group">
+                        <input type="submit" class="btn btn-block btn-dark	">
+                       </div>
+                       </form>
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+</section>
+<!-- 
+
+							<form th:object="${issueById}"
+								method="POST" th:action="@{/user/updateSolution}" class="mt-2">
+                                <input type="text" name="id" th:value="${issueById.cId}">
+								
+								<div class="form-group">
+									<label for="problem_field" class="label">Solutions:</label>
+									<textarea id="mytextarea"  th:value="${issueById.solution}" th:text="${issueById.solution}"
+										name="solution" class="form-control" rows="8"></textarea>
+								</div>								
+                                 <div class="form-group">
+                                 <input type="submit" class="btn btn-primary btn-block">                                 
+                                 </div>								
+							</form>
+ -->
+</body>
+</html>
